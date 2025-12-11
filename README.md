@@ -1,40 +1,120 @@
-🔹 To make the application production-style, I built a proper layered architecture:
+📘 Student Management System
 
-1️⃣ Controller Layer (TestApp.java)
-Calls the Service Layer methods only — no business logic here.
-It keeps the flow clean and acts like a real controller in enterprise apps.
+A Java-based CRUD application built using JDBC, MySQL, and a clean Layered Architecture.
 
-2️⃣ Service Layer
-This is the heart of the project:
-Implements business logic.
-Decides what should happen before interacting with the database.
-Fully hides DAO from the controller.
-Returns success/failure responses in a structured way.
-I used a Service Factory + Singleton Pattern to ensure only one service object is shared across the application.
+📌 Project Overview
 
-3️⃣ DAO Layer (Persistence Layer)
-Contains interfaces + concrete classes.
-Handles actual SQL operations (insert, update, search, delete).
-Uses PreparedStatement for safe + optimized database calls.
-No business logic, only pure DB interaction.
-DAO is also created using a Factory + Singleton, keeping the architecture scalable.
+This Student Management System allows you to:
 
-4️⃣ Utility Layer
-Central DB connection file
-Stores URL, username, password, and connection logic
-Ensures the whole application uses a single, reusable connection utility
+Add new students
 
-🔹 Project Flow (How data gets inserted in this architecture)
-To insert a new Student for example:
+Search student details
 
-Main Layer → Service Layer → DAO Layer → Database → Response Back
+Update existing student records
 
-Main Layer collects input (like name, age, Address).
+Delete student data
 
-Service Layer validates data and decides which DAO method to call.
+Handle missing data & validation
 
-DAO Layer builds the SQL query using PreparedStatement and executes it.
+🏗 Architecture Used
+✔ Layered Architecture
+Controller  →  Service  →  DAO  →  Database
 
-Database stores the record.
+✔ Design Patterns
 
-DAO → Service → Main returns success response back to the user.
+Factory Pattern (DAO Factory, Service Factory)
+
+DTO Pattern (Student Object)
+
+Singleton Pattern (Factory classes)
+
+🔧 Tech Stack
+Layer	Technology
+Programming Language	Java (Core)
+Database	MySQL
+Connectivity	JDBC
+Pattern	Layered + Factory
+📂 Project Structure
+src/
+└── in.ajay/
+    ├── controller/
+    │   └── TestApp.java
+    ├── dto/
+    │   └── Student.java
+    ├── persistence/
+    │   ├── RStudentDao.java
+    │   └── StudentDaoImpl.java
+    ├── service/
+    │   ├── RStudentService.java
+    │   └── StudentServiceImpl.java
+    ├── servicefactory/
+    │   └── StudentServiceFactory.java
+    ├── doafactory/
+    │   └── StudentDaoFactory.java
+
+🗄 Database Schema
+
+Create the table using:
+
+CREATE DATABASE studentmanagement;
+
+USE studentmanagement;
+
+CREATE TABLE student_data (
+    sid INT AUTO_INCREMENT PRIMARY KEY,
+    sname VARCHAR(50),
+    sage INT,
+    saddress VARCHAR(100)
+);
+
+🧩 Features Implemented
+✔ Add Student
+✔ Search Student
+✔ Update with field-wise validation
+✔ Delete Student
+✔ Error handling & safe SQL using PreparedStatement
+✔ Layered separation for scalability
+▶️ How to Run the Project
+1. Clone the repository
+git clone https://github.com/Ajaysinghratnawat/CRUD_APP_JDBC
+
+2. Import into Eclipse
+
+Open → Import Existing Project
+
+Ensure JDK 8+ is installed
+
+Add MySQL Connector JAR to classpath
+
+3. Configure Database Credentials
+
+Inside StudentDaoImpl.java, update:
+
+private static final String DBURL = "jdbc:mysql://localhost:3306/studentmanagement";
+private static final String DBUSERNAME = "root";
+private static final String DBPASSWORD = "your_password";
+
+4. Run the Application
+
+Execute:
+
+TestApp.java
+
+
+Follow the console menu to perform CRUD operations.
+
+📸 Sample Output
+1. Insert
+2. Search
+3. Update
+4. Delete
+5. Exit
+
+🚀 Future Enhancements
+
+Add Servlet + JSP 
+
+🤝 Contributing
+
+Pull requests are welcome.
+For major changes, please open an issue first to discuss what you’d like to improve.
