@@ -1,4 +1,5 @@
 🔹 To make the application production-style, I built a proper layered architecture:
+
 1️⃣ Controller Layer (TestApp.java)
 Calls the Service Layer methods only — no business logic here.
 It keeps the flow clean and acts like a real controller in enterprise apps.
